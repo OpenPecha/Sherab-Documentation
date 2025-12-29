@@ -95,7 +95,7 @@
 
 ## Purchase-to-Enrollment Workflow
 
-1.  Purchase in WordPress
+1.  Purchase the course in WordPress (Sherab-Edustore)
 2.  Order processed by WooCommerce
 3.  Plugin detects order
 4.  Enrollment request created with billing email
