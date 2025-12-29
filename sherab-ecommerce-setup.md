@@ -97,7 +97,7 @@
 
 1.  Purchase the course in WordPress (Sherab-Edustore)
 2.  Order processed by WooCommerce
-3.  Plugin detects order
+3.  OpenEdx Plugin detects order
 4.  Enrollment request created with billing email
 5.  API call to OpenEdX
 6.  Enrollment created in specified course/mode
