@@ -1,17 +1,16 @@
 
 # Mounting Frontend React Components in Tutor
 
-## 1. Fork the Required React Component
+## 1. Clone the Required React Component
 
-Go to the [Open edX GitHub organization](https://github.com/openedx) and fork the MFE repository you want to customize, for example:
+Go to the OpenPecha and clone the MFE repository you want to customise, for example:
 - `frontend-app-learning`
 - `frontend-app-account`
 - `frontend-app-profile`
 
-## 2. Clone Your Fork and Create a Feature Branch
+## 2. Create a Feature Branch
 
 ```bash
-git clone https://github.com/your-username/frontend-app-learning.git
 cd frontend-app-learning
 git checkout -b feature/my-custom-feature
 ```
