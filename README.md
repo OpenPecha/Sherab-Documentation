@@ -1,78 +1,51 @@
 # Sherab Project Documentation
 
-This repository contains the complete documentation for the **Sherab Project**.
-
-It includes instructions and guides for:
-
-- ✅ Installation
-- ⚙️ Setup & Configuration
-- 🔄 Migration steps
-- 🧩 Plugin integration
-- 🎨 Theme customisation
-
-Use this as the central reference for all technical setup and operational procedures related to the Sherab OpenEdX deployment.
+Welcome to the **Sherab Project**. This repository contains the central documentation, technical setup instructions, and operational procedures for our customized Open edX deployment.
 
 ---
 
-### 📚 Documentation
+## 📚 New Interns: Start Here!
+If you are new to the team, please read these files in strict order. They are designed to hold your hand through the entire setup of our platform.
 
-- 📘 [Tutor Setup & Customization Guide](tutor-setup-customization-guide.md)
+- 📘 [00. Getting Started: Global Prerequisites](00-getting-started-prerequisites.md)
+- ⬆️ [01. Tutor Installation & Upgrade Guide](01-tutor-installation-upgrade-guide.md)
+- ⚙️ [02. Tutor Setup & Customization Guide](02-tutor-setup-customization-guide.md)
+- 🧩 [03. Mounting Frontend MFEs](03-mounting-frontend-mfe.md)
+- 🛒 [04. Setting Up E-commerce for Sherab](04-sherab-ecommerce-setup.md)
+- 📱 [05. Android App Development Environment Setup](05-android-app-development-environment-setup.md)
 
-- 🧩 [Mounting Frontend MFEs](mounting-frontend-mfe.md)
+## 🧩 Advanced Features & Admin
+Once you're set up, refer to these documents for specific administrative tasks and deployments:
 
-- 🔄 [Tutor Migration to Production](tutor-migration-production.md)
-
-- ⬆️ [Tutor Installation & Upgrade Guide](tutor-installation-upgrade-guide.md)
-
-- 📱 [Android App Development Environment Setup](android-app-development-environment-setup.md)
-
-- 🤝 [Partner-Organization Mapping Guide](parters-organization-mapping-management.md)
-
-- 🌐 [Transifex Setup & Management](transifex-setup-and-management.md)
-
----
-
-# Sherab Project Repositories
-
-These are an organised overview of the core repositories maintained under the Sherab project by [Esukhia](https://github.com/Esukhia). These repositories together constitute the customised OpenEdX platform and associated components for the Sherab learning platform. There will be more repositories added here based on the need.
+- 🤝 [06. Partner-Organization Mapping](06-parters-organization-mapping-management.md)
+- 🚩 [07. Open edX Feature Flags](07-feature-flags.md)
+- 🌐 [08. Transifex Setup & Management](08-transifex-setup-and-management.md)
+- 🔄 [09. Tutor Server Migration Guide](09-tutor-migration-production.md)
+- 🚑 [10. Troubleshooting Common Issues](10-troubleshooting.md)
 
 ---
 
-## 📦 Core Repositories
+# 📦 Core Repositories
 
-### 1. [Sherab Theme](https://github.com/Esukhia/Sherab-theme)
-A custom theme for OpenEdX tailored for the Sherab learning platform, including branding, styles, and logos.
+These are our core repositories maintained under the Sherab project by [OpenPecha](https://github.com/OpenPecha).
 
-### 2. [Frontend App - Learner Dashboard](https://github.com/Esukhia/frontend-app-learner-dashboard)
-A micro-frontend application providing learners with a personalised dashboard, including course progress, activity overview, and notifications.
+### 1. [Sherab Theme](https://github.com/OpenPecha/Sherab-theme)
+A custom theme for Open edX tailored for the Sherab learning platform, including branding, styles, and logos.
 
-### 3. [Frontend Component - Footer](https://github.com/Esukhia/frontend-component-footer)
-A reusable frontend component for the footer used across Sherab's OpenEdx applications.
+### 2. [edx-platform](https://github.com/OpenPecha/edx-platform.git)
+Our custom fork of the Open edX core codebase.
 
-### 4. [edx-platform](https://github.com/Esukhia/edx-platform)
-A fork of the OpenEdx platform with Sherab-specific customisations and integrations.
+### 3. [Sherab Custom Plugin](https://github.com/OpenPecha/sherab-custom-plugin)
+A Django plugin extending core functionality with Sherab-specific backend logic and custom app APIs.
 
-### 5. [Frontend Component - Header](https://github.com/Esukhia/frontend-component-header)
-A shared header component used in various Sherab frontend applications, providing consistent navigation and branding.
+### 4. Micro-Frontends (MFEs)
+- [Learner Dashboard](https://github.com/OpenPecha/frontend-app-learner-dashboard)
+- [Frontend Component - Footer](https://github.com/OpenPecha/frontend-component-footer)
+- [Frontend Component - Header](https://github.com/OpenPecha/frontend-component-header)
 
-### 6. [Sherab Custom Plugin](https://github.com/Esukhia/sherab-custom-plugin)
-A Django plugin extending Open edx functionality with Sherab-specific backend logic, models, and APIS.
+We also utilize the default enabled MFEs from Open edX (Authn, Authoring, Account, Communications, Discussions, Gradebook, Learning, ORA Grading, Profile).
 
 ---
- ### Edx-mfe
-These MFEs come enabled by default
-
-- [Authn](https://github.com/openedx/frontend-app-authn/)
-- [Authoring](https://github.com/openedx/frontend-app-authoring/)
-- [Account](https://github.com/openedx/frontend-app-account/)
-- [Communications](https://github.com/openedx/frontend-app-communications/)
-- [Discussions](https://github.com/openedx/frontend-app-discussions/)
-- [Gradebook](https://github.com/openedx/frontend-app-gradebook/)
-- [Learner Dashboard](https://github.com/openedx/frontend-app-learner-dashboard/)
-- [Learning](https://github.com/openedx/frontend-app-learning/)
-- [ORA Grading](https://github.com/openedx/frontend-app-ora-grading/)
-- [Profile](https://github.com/openedx/frontend-app-profile/)
-
 
 # 🤝 How to Contribute
 
