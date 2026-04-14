@@ -17,11 +17,12 @@ If you are new to the team, please read these files in strict order. They are de
 ## 🧩 Advanced Features & Admin
 Once you're set up, refer to these documents for specific administrative tasks and deployments:
 
-- 🤝 [06. Partner-Organization Mapping](06-parters-organization-mapping-management.md)
+- 🤝 [06. Partner-Organization Mapping](06-partners-organization-mapping-management.md)
 - 🚩 [07. Open edX Feature Flags](07-feature-flags.md)
 - 🌐 [08. Transifex Setup & Management](08-transifex-setup-and-management.md)
 - 🔄 [09. Tutor Server Migration Guide](09-tutor-migration-production.md)
 - 🚑 [10. Troubleshooting Common Issues](10-troubleshooting.md)
+- 🚀 [11. Advanced Plugins & Translations](11-advanced-plugins-and-translations.md)
 
 ---
 
