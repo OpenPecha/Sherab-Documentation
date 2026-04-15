@@ -23,6 +23,8 @@ Once you're set up, refer to these documents for specific administrative tasks a
 - 🔄 [09. Tutor Server Migration Guide](09-tutor-migration-production.md)
 - 🚑 [10. Troubleshooting Common Issues](10-troubleshooting.md)
 - 🚀 [11. Advanced Plugins & Translations](11-advanced-plugins-and-translations.md)
+- 🧩 [12. Custom ORA Component Setup](12-custom-ora-component-setup.md)
+- 🗄️ [13. S3 Plugin Setup](13-s3-plugin-setup.md)
 
 ---
 
