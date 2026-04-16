@@ -13,6 +13,7 @@ If you are new to the team, please read these files in strict order. They are de
 - 🧩 [03. Mounting Frontend MFEs](03-mounting-frontend-mfe.md)
 - 🛒 [04. Setting Up E-commerce for Sherab](04-sherab-ecommerce-setup.md)
 - 📱 [05. Android App Development Environment Setup](05-android-app-development-environment-setup.md)
+- 🔁 [17. Development, Testing & Deployment Workflow](17-development-testing-deployment-workflow.md)
 
 ## 🧩 Advanced Features & Admin
 Once you're set up, refer to these documents for specific administrative tasks and deployments:
@@ -25,6 +26,9 @@ Once you're set up, refer to these documents for specific administrative tasks a
 - 🚀 [11. Advanced Plugins & Translations](11-advanced-plugins-and-translations.md)
 - 🧩 [12. Custom ORA Component Setup](12-custom-ora-component-setup.md)
 - 🗄️ [13. S3 Plugin Setup](13-s3-plugin-setup.md)
+- 🎨 [14. Header, Footer & Brand Component Overrides](14-header-footer-brand-override.md)
+- 🛒 [15. Ecommerce WordPress Setup](15-ecommerce-wordpress-setup.md)
+- 🌐 [16. MFE Localization & Translation Setup](16-mfe-localization-translations.md)
 
 ---
 
