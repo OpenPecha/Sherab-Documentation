@@ -54,10 +54,10 @@ We have specific Feature Flags and configurations required.
 
 1. Create a folder for local tutor plugins inside the tutor root directory:
    ```bash
-   mkdir -p tutor-plugins/configuration_plugin
-   cd tutor-plugins/configuration_plugin
+   mkdir tutor-plugins
+   cd tutor-plugins
    ```
-2. Create a file named `configuration_plugin.yml` in this folder:
+2. Create a file named `configuration_plugin.yml` in this folder (you can use `nano configuration_plugin.yml` in your terminal):
    *(Copy this configuration exactly as is. **Do not modify this** unless instructed.)*
    ```yaml
    name: configuration_plugin
