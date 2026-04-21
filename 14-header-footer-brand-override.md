@@ -132,4 +132,4 @@ Then push the `dist` directory to your deployment target.
 
 ---
 
-**Next Step:** Head back to [README.md](README.md) for an overview, or continue with [15-ecommerce-wordpress-setup.md](15-ecommerce-wordpress-setup.md).
+**Next Step:** Head back to [README.md](README.md) for an overview, or continue with [15. MFE Localization & Translation Setup](15-mfe-localization-translations.md).

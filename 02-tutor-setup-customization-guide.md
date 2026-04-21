@@ -5,7 +5,7 @@ Up to this point, you have a vanilla (plain vanilla) Open edX installation runni
 ---
 
 ## 1. Verify Your Environment
-Before we begin, ensure your python virtual environment is active, and confirm your tutor version is currently **19.0.2** (Sumac).
+Before we begin, ensure your python virtual environment is active, and confirm your tutor version is currently **21.0.1** (Ulmo).
 ```bash
 tutor --version
 ```
@@ -57,7 +57,7 @@ We have specific Feature Flags and configurations required.
    mkdir -p tutor-plugins/configuration_plugin
    cd tutor-plugins/configuration_plugin
    ```
-2. Create a file named `plugin.yml` in this folder:
+2. Create a file named `configuration_plugin.yml` in this folder:
    *(Copy this configuration exactly as is. **Do not modify this** unless instructed.)*
    ```yaml
    name: configuration_plugin

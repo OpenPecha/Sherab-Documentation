@@ -1,4 +1,4 @@
-# 16. MFE Localization & Translation Setup
+# 15. MFE Localization & Translation Setup
 
 This guide describes how to set up MFE localization and pull translations for any MFE in Sherab.
 

@@ -18,23 +18,53 @@ Open your terminal and run:
 ```bash
 pip install -U tutor-contrib-wordpress
 tutor plugins enable wordpress
-tutor dev launch
 ```
-This automatically sets up:
-1. Complete WordPress installation
-2. WooCommerce e-commerce plugin
-3. Sherab Commerce plugin (the bridge between Open edX and WordPress)
 
 ---
 
-## 2. Generate Plugin Configurations
-To connect the two systems, we need specific configuration URLs. Tutor will generate these for you.
+## 2. Development Setup
 
-Run this command to print the required data:
+### Launch Tutor
 ```bash
-tutor wordpress config printroot    
+tutor dev launch
 ```
-*Keep this terminal window open or copy the text, you will need it shortly.*
+
+### Configure the Development Domain
+Add the following to your Tutor config file (`config.yml`):
+```yaml
+WORDPRESS_HOST: store.local.overhang.io
+```
+Then save the configuration:
+```bash
+tutor config save
+```
+Access the development WordPress site at: [http://store.local.overhang.io](http://store.local.overhang.io)
+
+---
+
+## 3. Production Setup
+
+### Launch Tutor
+```bash
+tutor local launch
+```
+
+### Domain Registration
+Register the store domain on **Cloudflare**:
+```
+store.sherab.org
+```
+
+Add the URL to your Tutor config file (`config.yml`):
+```yaml
+WORDPRESS_HOST: store.sherab.org
+```
+
+Then save and apply:
+```bash
+tutor config save
+tutor local launch
+```
 
 ---
 
@@ -57,12 +87,12 @@ We must create a secure "key" in Open edX so WordPress is allowed to talk to it.
 ## Phase 2: Configure WordPress
 Now we give WordPress the key we just generated.
 
-1. Access WordPress by going to `http://local.openedx.io:8080/wp-admin` in your browser.
+1. Access WordPress by going to `http://local.openedx.io:8080/wp-admin` (dev) or your production WordPress admin URL.
 2. Look at the left sidebar menu. Go to **WooCommerce** -> **Settings**.
 3. Click on the **Integration** tab at the top.
 4. Click on **OpenEdX**.
 5. You will see a form. Enter the following:
-   - **LMS Domain:** `http://local.openedx.io:8000`
+   - **LMS Domain:** `http://local.openedx.io:8000` (dev) or your production LMS URL
    - **Client ID:** (Paste the ID from Phase 1)
    - **Client Secret:** (Paste the Secret from Phase 1)
 6. Scroll down and click **Test Connection (Generate JWT Token)**. If it turns green, you are successfully connected!

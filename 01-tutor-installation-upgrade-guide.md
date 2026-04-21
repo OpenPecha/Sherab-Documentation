@@ -103,7 +103,7 @@ tutor dev stop
 ---
 
 ## 9. Upgrade Tutor (Gradual Version Upgrades)
-Open edX requires you to upgrade version by version. We must go from Palm (16) -> Quince (17) -> Redwood (18) -> Sumac (19).
+Open edX requires you to upgrade version by version. We must go from Palm (16) -> Quince (17) -> Redwood (18) -> Sumac (19) -> Teak (20) -> Ulmo (21).
 
 *(Make sure your python virtual environment `tutor-env` is still activated!)*
 
@@ -121,12 +121,60 @@ tutor config save
 tutor dev upgrade --from=quince
 ```
 
-### Step 3: Upgrade to Sumac (Tutor 19) - Current Targeted Server
+### Step 3: Upgrade to Sumac (Tutor 19)
 ```bash
 pip install --upgrade "tutor[full]>=19.0.0,<20.0.0"
 tutor config save
 tutor dev upgrade --from=redwood
 ```
+
+### Step 4: Upgrade to Teak (Tutor 20)
+
+> [!IMPORTANT]
+> Before upgrading to Teak, you must unset the theme, disable non-essential plugins (keep `mfe`), and remove all mounts except `edx-platform`.
+
+```bash
+# 1. Unset the theme
+tutor dev do settheme default
+
+# 2. Disable non-essential plugins (keep mfe)
+tutor plugins disable cairn forum s3 wordpress
+
+# 3. Install Tutor 20 (Teak)
+pip install --upgrade "tutor[full]>=20.0.0,<21.0.0"
+tutor config save
+
+# 4. Switch to the Sherab Teak branch
+git fetch origin sherab-teak-dev
+git checkout sherab-teak-dev
+
+# 5. Rebuild the image (this will take some time)
+tutor images build openedx --no-cache
+
+# 6. Run the upgrade and relaunch
+tutor dev upgrade --from=sumac
+tutor dev launch
+```
+*Verify you can access the LMS at `http://local.openedx.io:8000` without errors before continuing.*
+
+### Step 5: Upgrade to Ulmo (Tutor 21) - Current Targeted Server
+```bash
+# 1. Install Tutor 21 (Ulmo)
+pip install --upgrade "tutor[full]>=21.0.0,<22.0.0"
+tutor config save
+
+# 2. Switch to the Sherab Ulmo branch
+git fetch origin sherab-ulmo1-dev
+git checkout sherab-ulmo1-dev
+
+# 3. Rebuild the image (this will take some time)
+tutor images build openedx --no-cache
+
+# 4. Run the upgrade and relaunch
+tutor dev upgrade --from=teak
+tutor dev launch
+```
+*Verify you can access the LMS at `http://local.openedx.io:8000` without errors.*
 
 ---
 

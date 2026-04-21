@@ -98,4 +98,4 @@ Modern apps block HTTP (they demand secure HTTPS). Our local environment runs on
 Click the green "Play" button in Android Studio to build and run the Open edX Android app locally. It should successfully talk to your Tutor backend.
 
 ---
-**Next Step:** See [06-parters-organization-mapping-management.md](06-parters-organization-mapping-management.md) to manage in-app mappings.
+**Next Step:** See [06-parters-organization-mapping-management.md](06-partners-organization-mapping-management.md) to manage in-app mappings.

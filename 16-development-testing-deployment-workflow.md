@@ -1,4 +1,4 @@
-# 17. Development, Testing & Deployment Workflow
+# 16. Development, Testing & Deployment Workflow
 
 This guide explains how we develop new features and bug fixes, how they are tested, and how they get deployed to staging and production. If you are new to the team, read this carefully before starting your first task.
 
