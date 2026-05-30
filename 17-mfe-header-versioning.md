@@ -2,12 +2,7 @@
 
 ## What Is This About?
 
-During the **Sumac** era, every Micro-Frontend (MFE) used the **same single version** of the header component. Life was simple.
-
-After upgrading to **Ulmo**, this changed. The Open edX community introduced a new architectural decision called **OEP-0065 (Frontend Composability)** which restructured how headers and footers are bundled with MFEs. As a result, different MFEs now require **different versions** of the `frontend-component-header`. If you use the wrong version, the MFE will either fail to build or display a broken header.
-
-> 📖 **Why did this happen?** Read the official proposal:
-> [OEP-0065: Frontend Composability — Header/Footer](https://open-edx-proposals.readthedocs.io/en/latest/architectural-decisions/oep-0065-arch-frontend-composability.html#header-footer)
+We are maintaining two different versions of the header component for our Micro-Frontends (MFEs). Different MFEs require specific versions, and using the wrong version will cause the MFE to either fail to build or display a broken header.
 
 This guide explains:
 1. Which header version goes with which MFE.
@@ -18,24 +13,7 @@ This guide explains:
 
 ---
 
-## Understanding the Version Split
-
-After the Ulmo upgrade, the header component has **two active branches** in our repository:
-
-| Branch | Header Version | Description |
-| ------ | -------------- | ----------- |
-| `wbc-stage-v6.6.0` | v6.6.0 | Used by **most** MFEs |
-| `wbc-stage-v8.0.0` | v8.0.0 | Used by **Discussions** and select newer MFEs |
-
-The footer component remains the same for all MFEs:
-
-| Branch | Used By |
-| ------ | ------- |
-| `wbc-ulmo1-stage` | All MFEs |
-
----
-
-## MFE-to-Header Version Mapping
+## Header version for MFEs
 
 Here is the exact mapping of which header version each MFE uses. **Pay close attention** — using the wrong version will break the build.
 
