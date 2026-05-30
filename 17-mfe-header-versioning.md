@@ -11,7 +11,7 @@ After upgrading to **Ulmo**, this changed. The Open edX community introduced a n
 
 This guide explains:
 1. Which header version goes with which MFE.
-2. How to create the Tutor plugin that installs the correct versions automatically during Docker image builds.
+2. How the Tutor plugin overrides the default versions automatically during Docker image builds.
 
 > [!IMPORTANT]
 > This is separate from the local development override described in [14-header-footer-brand-override.md](14-header-footer-brand-override.md). That guide is for **local development** (mounting repos). This guide is for **building Docker images** for staging and production.
