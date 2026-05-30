@@ -28,6 +28,7 @@ Once you're set up, refer to these documents for specific administrative tasks a
 - 🗄️ [13. S3 Plugin Setup](13-s3-plugin-setup.md)
 - 🎨 [14. Header, Footer & Brand Component Overrides](14-header-footer-brand-override.md)
 - 🌐 [15. MFE Localization & Translation Setup](15-mfe-localization-translations.md)
+- 🔀 [17. MFE Header Versioning (Post-Ulmo)](17-mfe-header-versioning.md)
 
 ---
 
@@ -45,11 +46,17 @@ Our custom fork of the Open edX core codebase.
 A Django plugin extending core functionality with Sherab-specific backend logic and custom app APIs.
 
 ### 4. Micro-Frontends (MFEs)
+- [Authentication (Authn)](https://github.com/OpenPecha/frontend-app-authn)
+- [Account](https://github.com/OpenPecha/frontend-app-account)
+- [Authoring (Studio)](https://github.com/OpenPecha/frontend-app-authoring)
+- [Learning](https://github.com/OpenPecha/frontend-app-learning)
 - [Learner Dashboard](https://github.com/OpenPecha/frontend-app-learner-dashboard)
+- [ORA (Open Response Assessment)](https://github.com/OpenPecha/frontend-app-ora)
+- [Profile](https://github.com/OpenPecha/frontend-app-profile)
 - [Frontend Component - Footer](https://github.com/OpenPecha/frontend-component-footer)
 - [Frontend Component - Header](https://github.com/OpenPecha/frontend-component-header)
 
-We also utilize the default enabled MFEs from Open edX (Authn, Authoring, Account, Communications, Discussions, Gradebook, Learning, ORA Grading, Profile).
+We also utilize default Open edX MFEs that do **not** have custom OpenPecha forks: Communications, Discussions, Gradebook, and ORA Grading. These still receive our custom header and footer during the Docker image build — see [17. MFE Header Versioning](17-mfe-header-versioning.md) for details.
 
 ---
 
