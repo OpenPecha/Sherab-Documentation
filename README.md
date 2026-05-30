@@ -28,8 +28,7 @@ Once you're set up, refer to these documents for specific administrative tasks a
 - 🗄️ [13. S3 Plugin Setup](13-s3-plugin-setup.md)
 - 🎨 [14. Header, Footer & Brand Component Overrides](14-header-footer-brand-override.md)
 - 🌐 [15. MFE Localization & Translation Setup](15-mfe-localization-translations.md)
-- 🔧 [17. Database & Media Restoration Guide](17-database-media-restoration-guide.md)
-- 🔀 [18. MFE Header Versioning (Post-Ulmo)](18-mfe-header-versioning.md)
+- 🔀 [17. MFE Header Versioning (Post-Ulmo)](17-mfe-header-versioning.md)
 
 ---
 
@@ -57,7 +56,7 @@ A Django plugin extending core functionality with Sherab-specific backend logic 
 - [Frontend Component - Footer](https://github.com/OpenPecha/frontend-component-footer)
 - [Frontend Component - Header](https://github.com/OpenPecha/frontend-component-header)
 
-We also utilize default Open edX MFEs that do **not** have custom OpenPecha forks: Communications, Discussions, Gradebook, and ORA Grading. These still receive our custom header and footer during the Docker image build — see [18. MFE Header Versioning](18-mfe-header-versioning.md) for details.
+We also utilize default Open edX MFEs that do **not** have custom OpenPecha forks: Communications, Discussions, Gradebook, and ORA Grading. These still receive our custom header and footer during the Docker image build — see [17. MFE Header Versioning](17-mfe-header-versioning.md) for details.
 
 ---
 
