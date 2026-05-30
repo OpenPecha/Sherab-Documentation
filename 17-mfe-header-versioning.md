@@ -20,13 +20,13 @@ Here is the exact mapping of which header version each MFE uses. **Pay close att
 | MFE | Footer Branch | Header Branch |
 | --- | ------------- | ------------- |
 | **Profile** | `wbc-ulmo1-stage` | `wbc-stage-v6.6.0` |
-| **Learning** | `wbc-ulmo1-stage` | `wbc-stage-v6.6.0` |
+| **Learning** | `wbc-ulmo1-stage` | `wbc-stage-v8.0.0` |
 | **Communications** | `wbc-ulmo1-stage` | `wbc-stage-v6.6.0` |
 | **Gradebook** | `wbc-ulmo1-stage` | `wbc-stage-v6.6.0` |
 | **ORA Grading** | `wbc-ulmo1-stage` | `wbc-stage-v6.6.0` |
 | **Learner Dashboard** | `wbc-ulmo1-stage` | `wbc-stage-v6.6.0` |
-| **Authoring** | `wbc-ulmo1-stage` | `wbc-stage-v6.6.0` |
-| **Discussions** | `wbc-ulmo1-stage` | `wbc-stage-v8.0.0` |
+| **Authoring** | `wbc-ulmo1-stage` | `wbc-stage-v8.0.0` |
+| **Discussions** | `wbc-ulmo1-stage` | `wbc-stage-v6.6.0` |
 
 > [!NOTE]
 > **Communications, Discussions, Gradebook, and ORA Grading** do not have custom OpenPecha forks — they use the default Open edX MFE code. However, they still receive our custom header and footer via this plugin during the Docker image build.
