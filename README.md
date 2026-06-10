@@ -29,6 +29,7 @@ Once you're set up, refer to these documents for specific administrative tasks a
 - 🎨 [14. Header, Footer & Brand Component Overrides](14-header-footer-brand-override.md)
 - 🌐 [15. MFE Localization & Translation Setup](15-mfe-localization-translations.md)
 - 🔀 [17. MFE Header Versioning (Post-Ulmo)](17-mfe-header-versioning.md)
+- 📚 [18. Catalog MFE — Local & Server Usage + Page Differences](18-catalog-mfe-usage-and-page-differences.md)
 
 ---
 
@@ -51,6 +52,7 @@ A Django plugin extending core functionality with Sherab-specific backend logic 
 - [Authoring (Studio)](https://github.com/OpenPecha/frontend-app-authoring)
 - [Learning](https://github.com/OpenPecha/frontend-app-learning)
 - [Learner Dashboard](https://github.com/OpenPecha/frontend-app-learner-dashboard)
+- [Catalog](https://github.com/OpenPecha/frontend-app-catalog)
 - [ORA (Open Response Assessment)](https://github.com/OpenPecha/frontend-app-ora)
 - [Profile](https://github.com/OpenPecha/frontend-app-profile)
 - [Frontend Component - Footer](https://github.com/OpenPecha/frontend-component-footer)
