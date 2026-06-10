@@ -29,7 +29,7 @@ Once you're set up, refer to these documents for specific administrative tasks a
 - 🎨 [14. Header, Footer & Brand Component Overrides](14-header-footer-brand-override.md)
 - 🌐 [15. MFE Localization & Translation Setup](15-mfe-localization-translations.md)
 - 🔀 [17. MFE Header Versioning (Post-Ulmo)](17-mfe-header-versioning.md)
-- 📚 [18. Catalog MFE — Local & Server Usage + Page Differences](18-catalog-mfe-usage-and-page-differences.md)
+- 📚 [18. Catalog MFE — Local & Server Setup](18-catalog-mfe-usage-and-page-differences.md)
 
 ---
 
