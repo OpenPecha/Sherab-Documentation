@@ -4,17 +4,6 @@
 **Repository:** https://github.com/OpenPecha/frontend-app-catalog  
 **Branches:** `wbc-ulmo1-stage` (local + staging) · `wbc-ulmo1-prod` (production)
 
-### Summary of updates (this revision)
-
-- **New consolidated plugin:** All Catalog LMS settings and the `edx-search==4.4.0` workaround live in `catalog_mfe.py` — removed from `configuration_plugin.yml` and `catalog_edx_search.py` (deleted) so a future Tutor release with native Catalog config can be enabled by disabling one plugin only.
-- **§1.5 expanded:** Full `catalog_mfe.py` source documented (enable flags, dev/prod URLs, `INSTALL_SEARCH_440`, and `ENV_PATCHES` hooks).
-- **Plugin table updated:** Lists `catalog_mfe.py` instead of `configuration_plugin.yml` / `catalog_edx_search.py` for Catalog; `configuration_plugin.yml` remains for general Sherab flags only.
-- **§2.2 server deploy:** Staging/production Catalog URL changes go in `catalog_mfe.py` (`CATALOG_URLS_PROD`), with `https://apps.your-domain.org/catalog` as the server example (local prod-mode uses `http://apps.local.openedx.io/catalog` without port).
-- **Dev vs prod URLs clarified:** `CATALOG_URLS_DEV` → `tutor dev` (`:1998`); `CATALOG_URLS_PROD` → `tutor local` (proxy URL, no port).
-- **Part 4 quick reference:** Key files table points to `catalog_mfe.py` as the single Catalog + edx-search plugin.
-
----
-
 ## Before you start
 
 ### Prerequisites
