@@ -22,7 +22,7 @@ Catalog replaces legacy LMS Home, Course Catalog, and Course About pages.
 | Plugin | Purpose |
 |--------|---------|
 | `forked-mfe.py` | Catalog MFE registry (port 1998) |
-| `catalog_mfe.py` | Enable Catalog, LMS URLs, `edx-search==4.4.0` (Ulmo.1 workaround) |
+| `catalog_mfe.py` | Enable Catalog, LMS URLs, `edx-search==4.4.0` (Ulmo.1 workaround), **WooCommerce Buy Course plugin slot** (staging/prod image build) |
 | `forked-header-footer.py` | Sherab header/footer in Catalog build |
 
 > Catalog LMS settings live in `catalog_mfe.py` only — not `configuration_plugin.yml`. Disable this plugin when a future Tutor release ships native Catalog config.
@@ -81,47 +81,48 @@ mfes["catalog"] = {
 }
 ```
 
-**`catalog_mfe.py`** — LMS settings and edx-search patch (enable flags, dev/prod URLs):
+**`catalog_mfe.py`** — LMS settings, edx-search patch, and **WooCommerce Buy Course** plugin-slot wiring for server builds:
 
 ```python
 from tutor import hooks
+from tutormfe.hooks import PLUGIN_SLOTS
 
-# Temporary Ulmo.1 Catalog MFE settings.
-# Disable/remove this plugin when Tutor ships native Catalog config
-# to avoid duplicate LMS settings.
+# ... CATALOG_ENABLE, CATALOG_URLS_DEV, CATALOG_URLS_PROD, INSTALL_SEARCH_440 ...
 
-CATALOG_ENABLE = """
-FEATURES['ENABLE_CATALOG_MICROFRONTEND'] = True
-ENABLE_CATALOG_MICROFRONTEND = True
+MFE_CATALOG_BUY_COURSE_BUILDTIME_IMPORTS = """
+import BuyCourseEnrollmentButton from './src/plugins/BuyCourseEnrollmentButton';
 """
 
-CATALOG_URLS_DEV = """
-CATALOG_MICROFRONTEND_URL = "http://apps.local.openedx.io:1998/catalog"
-MFE_CONFIG["CATALOG_MFE_URL"] = CATALOG_MICROFRONTEND_URL
-MFE_CONFIG["CATALOG_MICROFRONTEND_URL"] = CATALOG_MICROFRONTEND_URL
-"""
-
-CATALOG_URLS_PROD = """
-CATALOG_MICROFRONTEND_URL = "http://apps.local.openedx.io/catalog"
-MFE_CONFIG["CATALOG_MFE_URL"] = CATALOG_MICROFRONTEND_URL
-MFE_CONFIG["CATALOG_MICROFRONTEND_URL"] = CATALOG_MICROFRONTEND_URL
-"""
-
-INSTALL_SEARCH_440 = r"""
-RUN --mount=type=cache,target=/openedx/.cache/pip,sharing=shared \
-    pip install "edx-search==4.4.0"
-"""
+PLUGIN_SLOTS.add_items([
+    (
+        "catalog",
+        "org.openedx.frontend.catalog.course_about_page.enrollment_button",
+        """
+        {
+            op: PLUGIN_OPERATIONS.Hide,
+            widgetId: 'default_contents',
+        },
+        {
+            op: PLUGIN_OPERATIONS.Insert,
+            widget: {
+                id: 'sherab_buy_course_enrollment_button',
+                type: DIRECT_PLUGIN,
+                RenderWidget: BuyCourseEnrollmentButton,
+            },
+        },
+        """,
+    ),
+])
 
 hooks.Filters.ENV_PATCHES.add_items([
-    ("openedx-lms-common-settings", CATALOG_ENABLE),
-    ("openedx-lms-development-settings", CATALOG_URLS_DEV),
-    ("openedx-lms-production-settings", CATALOG_URLS_PROD),
-    ("openedx-dockerfile-post-python-requirements", INSTALL_SEARCH_440),
-    ("openedx-dev-dockerfile-post-python-requirements", INSTALL_SEARCH_440),
+    # ... openedx-lms-* and edx-search patches ...
+    ("mfe-env-config-buildtime-imports", MFE_CATALOG_BUY_COURSE_BUILDTIME_IMPORTS),
 ])
 ```
 
 > The `INSTALL_SEARCH_440` block patches the openedx Dockerfile to force `edx-search==4.4.0` (required Ulmo.1 workaround — without it, Catalog course search returns 404).
+
+> **WooCommerce Buy Course:** On staging/production, Tutor **replaces** the catalog repo’s `env.config.jsx` during the MFE Docker build. The Buy Course button is injected via `PLUGIN_SLOTS` + `mfe-env-config-buildtime-imports` above (same pattern as tutor-indigo). The component source is `src/plugins/BuyCourseEnrollmentButton.tsx` in the catalog Git branch — not duplicated in the Python plugin file.
 
 Regenerate config after any plugin change:
 
@@ -161,6 +162,45 @@ Catalog service: `tutor_dev-catalog-1` on port **1998**.
 
 ---
 
+## WooCommerce Buy Course (catalog course about page)
+
+Sherab uses **WordPress/WooCommerce** for paid courses (see [04 — E-commerce Setup](04-sherab-ecommerce-setup.md)). The legacy LMS course-about page showed **Buy Course** via `CourseMode.product_url`. The default Catalog MFE shows **Enroll now** (Oscar/ecommerce checkout path) — wrong for WooCommerce.
+
+### What we changed
+
+| Piece | Location | Local (`tutor dev`) | Staging / prod (`tutor local`) |
+|-------|----------|---------------------|--------------------------------|
+| Buy Course button | `src/plugins/BuyCourseEnrollmentButton.tsx` | Mounted repo | Git clone in Docker build |
+| Plugin slot registration | Thin `env.config.jsx` in catalog repo | **Used** (bind-mount) | **Not used** — Tutor overwrites `env.config.jsx` at image build |
+| Plugin slot injection | `catalog_mfe.py` `PLUGIN_SLOTS` | Optional (local uses `env.config.jsx`) | **Required** for Buy Course button |
+| View course when enrolled | `EnrolledStatus.tsx` | Mounted repo | Shipped in catalog bundle after merge |
+
+**Button logic:** `GET /api/courses/v1/courses/{courseId}/` → if `purchase_link` is set (from CourseMode `product_url`), show **Buy Course** and redirect to the WooCommerce store; otherwise show **Enroll now**.
+
+**Prerequisites (already on Sherab):**
+
+- `ENABLE_EXTENDED_COURSE_DETAILS = True` in `configuration_plugin.yml` (exposes `purchase_link` on the Course API)
+- Verified CourseMode with **Product URL** set per paid course in Studio
+- WordPress store + `openedx-commerce` OAuth ([doc 04](04-sherab-ecommerce-setup.md))
+- Oscar checkout disabled in LMS admin
+
+### Local dev checkout
+
+After merging the catalog branch (or checking out `feature/catalog-woocommerce-buy-course-enrollment`):
+
+```bash
+cd "$($TUTOR config printroot)/frontend-app-catalog"
+git pull   # branch with src/plugins/BuyCourseEnrollmentButton.tsx + thin env.config.jsx
+
+$TUTOR dev restart catalog
+```
+
+Verify on a paid course about page: **Buy Course** → store checkout → enrollment → **View course** when enrolled.
+
+> **Do not** copy `env.config.jsx` manually to staging/production servers. Deploy `catalog_mfe.py` and rebuild the MFE image instead.
+
+---
+
 ## Server setup (staging & production)
 
 Servers use **`tutor local`**, not `tutor dev`.
@@ -172,18 +212,19 @@ Servers use **`tutor local`**, not `tutor dev`.
 
 ### Before deploy
 
-1. Ensure `forked-mfe.py`, `catalog_mfe.py`, and `forked-header-footer.py` are on the server and enabled.
+1. Ensure `forked-mfe.py`, `catalog_mfe.py` (with **PLUGIN_SLOTS** for Buy Course), and `forked-header-footer.py` are on the server and enabled.
 2. Update `CATALOG_URLS_PROD` in `catalog_mfe.py` to your real MFE URL (e.g. `https://apps.your-domain.org/catalog`).
 3. Set `forked-mfe.py` version to `wbc-ulmo1-stage` (staging) or `wbc-ulmo1-prod` (production).
+4. Merge the catalog PR that includes `src/plugins/BuyCourseEnrollmentButton.tsx` and `EnrolledStatus.tsx` into the branch pinned by `forked-mfe.py`.
 
 ### Deploy
 
 ```bash
 tutor config save
-tutor images build catalog-prod
-tutor images build openedx
+tutor images build mfe          # rebuilds catalog-prod with PLUGIN_SLOTS + catalog Git branch
+tutor images build openedx      # if edx-search or LMS settings changed
 tutor local stop && tutor local start -d
-tutor local restart lms cms
+tutor local restart lms cms mfe
 ```
 
 If course search fails after restart, force-recreate LMS/CMS (same as local).
@@ -193,6 +234,8 @@ If course search fails after restart, force-recreate LMS/CMS (same as local).
 - LMS root redirects to Catalog home
 - Catalog loads course data (not error box)
 - `tutor local run lms pip show edx-search` → **4.4.0**
+- Paid course **about** page in Catalog shows **Buy Course** (not Enroll now)
+- Enrolled user sees **View course** on the about page
 
 ---
 
@@ -201,8 +244,10 @@ If course search fails after restart, force-recreate LMS/CMS (same as local).
 | File | Path |
 |------|------|
 | Catalog clone | `$(tutor config printroot)/frontend-app-catalog` |
+| Buy Course component | `frontend-app-catalog/src/plugins/BuyCourseEnrollmentButton.tsx` |
+| Local plugin slot only | `frontend-app-catalog/env.config.jsx` (thin; **local dev bind-mount only**) |
 | MFE registry | `~/Library/Application Support/tutor-plugins/forked-mfe.py` |
 | Catalog plugin | `~/Library/Application Support/tutor-plugins/catalog_mfe.py` |
 | Header/footer | `~/Library/Application Support/tutor-plugins/forked-header-footer.py` |
 
-**Related:** [14 — Header, Footer & Brand Overrides](14-header-footer-brand-override.md) · [16 — Deployment Workflow](16-development-testing-deployment-workflow.md)
+**Related:** [04 — E-commerce Setup](04-sherab-ecommerce-setup.md) · [14 — Header, Footer & Brand Overrides](14-header-footer-brand-override.md) · [16 — Deployment Workflow](16-development-testing-deployment-workflow.md)
