@@ -131,7 +131,7 @@ Now let's create something to sell!
 5. It uses the OAuth API key to instantly tell Open edX to enroll the student's email address in the mapped `Course ID`.
 6. The student logs into Open edX and their course is waiting for them!
 
-> **Catalog MFE:** The course about page shows **Buy Course** when `CourseMode.product_url` is set (via Course API `purchase_link`). Local dev uses a thin `env.config.jsx` in the mounted catalog repo; staging/production inject the same behavior via `catalog_mfe.py` `PLUGIN_SLOTS` at MFE image build. See [18 — Catalog MFE Setup](18-catalog-mfe-usage-and-page-differences.md#woocommerce-buy-course-catalog-course-about-page).
+> **Catalog MFE:** The course about page shows **Buy Course** when `CourseMode.product_url` is set (via Course API `purchase_link`). Wiring lives in catalog Git (`env.config.jsx` + `src/plugins/BuyCourseEnrollmentButton.tsx`); `catalog_mfe.py` restores `env.config.jsx` at catalog Docker build. See [18 — Catalog MFE Setup](18-catalog-mfe-usage-and-page-differences.md#woocommerce-buy-course-catalog-course-about-page).
 
 ---
 
