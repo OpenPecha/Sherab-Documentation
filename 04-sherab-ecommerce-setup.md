@@ -124,11 +124,14 @@ Now let's create something to sell!
 ---
 
 ## How It Works (The Student Experience)
-1. Student browses courses in WordPress.
-2. They purchase via WooCommerce handling the credit card transaction.
-3. Our plugin detects the completed order.
-4. It uses the OAuth API key to instantly tell Open edX to enroll the student's email address in the mapped `Course ID`.
-5. The student logs into Open edX and their course is waiting for them!
+1. Student browses courses in WordPress or the **Catalog MFE** course about page.
+2. On a paid course, they click **Buy Course** (Catalog) or purchase from the WooCommerce store.
+3. WooCommerce handles the credit card transaction.
+4. Our plugin detects the completed order.
+5. It uses the OAuth API key to instantly tell Open edX to enroll the student's email address in the mapped `Course ID`.
+6. The student logs into Open edX and their course is waiting for them!
+
+> **Catalog MFE:** The course about page shows **Buy Course** when `CourseMode.product_url` is set (via Course API `purchase_link`). The button component lives in catalog Git (`src/plugins/BuyCourseEnrollmentButton.tsx`); the enrollment slot is injected for the server by the `catalog_customization.py` Tutor plugin (`mfe-env-config-runtime-definitions-catalog`), and registered locally via a gitignored `env.config.jsx` for `tutor dev`. See [18 — Catalog MFE Setup](18-catalog-mfe-usage-and-page-differences.md#woocommerce-buy-course-catalog-course-about-page).
 
 ---
 
