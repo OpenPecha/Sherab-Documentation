@@ -19,14 +19,13 @@ Catalog replaces the legacy LMS Home, Course Catalog, and Course About pages.
 
 | Plugin | Purpose |
 | --- | --- |
-| `forked-mfe.py` | Registers Catalog MFE (port 1998) |
-| `catalog_mfe.py` | Enables Catalog, sets LMS URLs, pins `edx-search==4.4.0` (Ulmo.1 workaround) |
+| `catalog_mfe.py` | Enables Catalog, sets LMS URLs, pins `edx-search==4.4.0` (Ulmo.1 workaround), Registers Catalog MFE (port 1998)  |
 | `catalog_customization.py` | Injects the Buy Course slot into the generated `env.config.jsx` (catalog-scoped) |
 
 > Catalog LMS settings live in `catalog_mfe.py` only — **not** `configuration_plugin.yml`. Disable these plugins when a future Tutor release ships native Catalog config.
 
 ```bash
-tutor plugins list   # expect: mfe, forked-mfe, catalog_mfe, catalog_customization
+tutor plugins list   # expect: mfe, catalog_mfe, catalog_customization
 ```
 
 ---
@@ -59,20 +58,28 @@ tutor mounts list   # expect: catalog service mounted at /openedx/app
 
 These are already set in Sherab — verify they exist, don't hand-edit generated env files.
 
-`forked-mfe.py` — Catalog registry:
-
-```python
-mfes["catalog"] = {
-    "repository": "https://github.com/OpenPecha/frontend-app-catalog.git",
-    "port": 1998,
-    "version": "wbc-ulmo1-stage",
-}
-```
-
-`catalog_mfe.py` — LMS settings and the edx-search patch:
+`catalog_mfe.py` — LMS settings, the edx-search patch and the catalog registry:
 
 ```python
 from tutor import hooks
+from tutormfe.hooks import MFE_APPS
+
+# Temporary Ulmo.1 Catalog MFE settings.
+# Disable/remove this plugin when Tutor ships native Catalog config
+# to avoid duplicate LMS settings.
+
+# Register the Catalog MFE (it is NOT a core Tutor MFE, so it must be
+# registered here for the catalog service + CORS/CSRF entries to be
+# generated in both dev and prod).
+@MFE_APPS.add()
+def _add_catalog_mfe(mfes):
+    mfes["catalog"] = {
+        "repository": "https://github.com/OpenPecha/frontend-app-catalog.git",
+        "port": 1998,
+        "version": "wbc-ulmo1-stage",
+    }
+    return mfes
+
 
 CATALOG_ENABLE = """
 FEATURES['ENABLE_CATALOG_MICROFRONTEND'] = True
@@ -204,7 +211,7 @@ Verify (Catalog service runs as `tutor_dev-catalog-1` on port **1998**):
 - [ ] Free course about page → **Enroll now**
 - [ ] Enrolled user → **View course**
 
-> The Buy Course behavior is already wired by the 3 plugins above plus the committed catalog branch — no extra steps. If a check fails, see [Reference Only - Not a Setup Step: Buy Course Customization Explained](#reference-only---not-a-setup-step-buy-course-customization-explained).
+> The Buy Course behavior is already wired by the 2 plugins above plus the committed catalog branch — no extra steps. If a check fails, see [Reference Only - Not a Setup Step: Buy Course Customization Explained](#reference-only---not-a-setup-step-buy-course-customization-explained).
 
 ---
 
@@ -216,7 +223,7 @@ Servers use **`tutor local`**, not `tutor dev`.
 
 1. Ensure `forked-mfe.py`, `catalog_mfe.py`, and `catalog_customization.py` are on the server and enabled.
 2. Update `CATALOG_URLS_PROD` in `catalog_mfe.py` to your real MFE URL (e.g. `https://apps.your-domain.org/catalog`).
-3. Set the `forked-mfe.py` version to `wbc-ulmo1-stage` (staging) or `wbc-ulmo1-prod` (production).
+3. Set the `catalog_mfe.py` version to `wbc-ulmo1-stage` (staging) or `wbc-ulmo1-prod` (production).
 4. Confirm the pinned branch includes `src/plugins/BuyCourseEnrollmentButton.tsx` and `EnrolledStatus.tsx`. No `env.config.jsx` is committed — the server slot comes from `catalog_customization.py`.
 
 ### Deploy
@@ -230,14 +237,6 @@ tutor local restart lms cms mfe
 ```
 
 If course search fails after restart, force-recreate LMS/CMS (same as local).
-
-### Verify on server
-
-- [ ] LMS root redirects to Catalog home
-- [ ] Catalog loads course data (not an error box)
-- [ ] `tutor local run lms pip show edx-search` → **4.4.0**
-- [ ] Paid course about page shows **Buy Course** (not Enroll now)
-- [ ] Enrolled user sees **View course**
 
 ---
 
