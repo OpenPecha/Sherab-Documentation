@@ -1,7 +1,6 @@
 # 18. Catalog MFE — Local & Server Setup
 
 **Repository:** [https://github.com/OpenPecha/frontend-app-catalog](https://github.com/OpenPecha/frontend-app-catalog)
-**Branches:** `wbc-ulmo1-stage` (local + staging) · `wbc-ulmo1-prod` (production)
 
 Catalog replaces the legacy LMS Home, Course Catalog, and Course About pages.
 
@@ -82,20 +81,15 @@ def _add_catalog_mfe(mfes):
 
 
 CATALOG_ENABLE = """
-FEATURES['ENABLE_CATALOG_MICROFRONTEND'] = True
 ENABLE_CATALOG_MICROFRONTEND = True
 """
 
 CATALOG_URLS_DEV = """
-CATALOG_MICROFRONTEND_URL = "http://apps.local.openedx.io:1998/catalog"
-MFE_CONFIG["CATALOG_MFE_URL"] = CATALOG_MICROFRONTEND_URL
-MFE_CONFIG["CATALOG_MICROFRONTEND_URL"] = CATALOG_MICROFRONTEND_URL
+CATALOG_MICROFRONTEND_URL = "http://{{ MFE_HOST }}:{{ get_mfe('catalog').port }}/catalog"
 """
 
 CATALOG_URLS_PROD = """
-CATALOG_MICROFRONTEND_URL = "http://apps.local.openedx.io/catalog"
-MFE_CONFIG["CATALOG_MFE_URL"] = CATALOG_MICROFRONTEND_URL
-MFE_CONFIG["CATALOG_MICROFRONTEND_URL"] = CATALOG_MICROFRONTEND_URL
+CATALOG_MICROFRONTEND_URL = "http://{{ MFE_HOST }}/catalog"
 """
 
 INSTALL_SEARCH_440 = r"""
@@ -191,13 +185,6 @@ tutor config save
 tutor images build catalog-dev
 tutor images build openedx-dev    # required for edx-search 4.4.0; can take 45–90+ min
 
-# Force-recreate LMS/CMS so they pick up edx-search==4.4.0
-# (`tutor dev restart` alone reuses the old container):
-docker compose \
-  -f "$(tutor config printroot)/env/local/docker-compose.yml" \
-  -f "$(tutor config printroot)/env/dev/docker-compose.yml" \
-  --project-name tutor_dev up -d --force-recreate lms cms
-
 tutor dev start -d
 tutor dev status
 ```
@@ -222,9 +209,8 @@ Servers use **`tutor local`**, not `tutor dev`.
 ### Before deploy
 
 1. Ensure `forked-mfe.py`, `catalog_mfe.py`, and `catalog_customization.py` are on the server and enabled.
-2. Update `CATALOG_URLS_PROD` in `catalog_mfe.py` to your real MFE URL (e.g. `https://apps.your-domain.org/catalog`).
-3. Set the `catalog_mfe.py` version to `wbc-ulmo1-stage` (staging) or `wbc-ulmo1-prod` (production).
-4. Confirm the pinned branch includes `src/plugins/BuyCourseEnrollmentButton.tsx` and `EnrolledStatus.tsx`. No `env.config.jsx` is committed — the server slot comes from `catalog_customization.py`.
+2. Set the `catalog_mfe.py` version to `wbc-ulmo1-stage` (staging) or `wbc-ulmo1-prod` (production).
+3. Confirm the pinned branch includes `src/plugins/BuyCourseEnrollmentButton.tsx` and `EnrolledStatus.tsx`. No `env.config.jsx` is committed — the server slot comes from `catalog_customization.py`.
 
 ### Deploy
 
@@ -235,9 +221,6 @@ tutor images build openedx      # if edx-search or LMS settings changed
 tutor local stop && tutor local start -d
 tutor local restart lms cms mfe
 ```
-
-If course search fails after restart, force-recreate LMS/CMS (same as local).
-
 ---
 
 ## Reference Only - Not a Setup Step: Buy Course Customization Explained
