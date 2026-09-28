@@ -48,8 +48,11 @@
 - [ ] 16. Rebrand Discussion Page [#450](https://github.com/Webuddhist-tech/Sherab-Project/issues/450)
   - Update the design of the discussion page to match the new branding.
 
-- [ ] 17. (Optional) Custom Course Bundling Feature
+- [ ] 17. Show banner message on catalog homepage [#441](https://github.com/Webuddhist-tech/Sherab-Project/issues/441)
+  - Add a banner message on the catalog homepage to inform users about the rebranding.
+
+- [ ] 18. (Optional) Custom Course Bundling Feature
   - Build a lightweight course grouping feature to replace the heavier programs feature.
 
-- [ ] 18. (Optional) Isolate S3 Bucket for Production [#420](https://github.com/Webuddhist-tech/Sherab-Project/issues/420)
+- [ ] 19. (Optional) Isolate S3 Bucket for Production [#420](https://github.com/Webuddhist-tech/Sherab-Project/issues/420)
   - Isolate the production S3 bucket and configure separate buckets for staging and local testing.
