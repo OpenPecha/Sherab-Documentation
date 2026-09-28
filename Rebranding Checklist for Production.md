@@ -87,6 +87,12 @@ tutor plugins enable mfe-bullseye-eol
 - [ ] In `configuration_plugin.yml`, add:
 
 ```yaml
+openedx-common-settings: |
+  EXTENSION_BASE_URL = "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ MFE_HOST }}"
+
+openedx-development-settings: |
+  EXTENSION_BASE_URL = "http://{{ MFE_HOST }}:{{ get_mfe('extension').port }}"
+
 mfe-lms-common-settings: |
   MFE_CONFIG["CATALOG_MICROFRONTEND_URL"] = CATALOG_MICROFRONTEND_URL
 ```
