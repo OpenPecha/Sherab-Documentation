@@ -27,10 +27,9 @@
 - [ ] 9. ORA Rebranding [#453](https://github.com/Webuddhist-tech/Sherab-Project/issues/453)
   - Update the design for the Open Response Assessment (ORA) component to match the new branding.
 
----
-
 - [ ] 10. Become a Course Partner Page [#410](https://github.com/Webuddhist-tech/Sherab-Project/issues/410)
   - Add a new "Become a Course Partner" page.
+---
 
 - [ ] 11. Move Static Pages to Extension MFE [#443](https://github.com/Webuddhist-tech/Sherab-Project/issues/443)
   - Migrate About Us, Contact Us, and Privacy Policy pages to the extension MFE.
