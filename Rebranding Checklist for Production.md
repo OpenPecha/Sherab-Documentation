@@ -11,7 +11,6 @@ Merge changes into the `wbc-ulmo1-stage` & `wbc-ulmo1-prod` branches for the fol
 - [ ] `frontend-app-authoring`
 - [ ] `frontend-app-catalog`
 - [ ] `frontend-app-discussions`
-- [ ] `frontend-app-extension`
 - [ ] `frontend-app-learner-dashboard`
 - [ ] `frontend-app-learning`
 - [ ] `frontend-app-profile`
@@ -95,6 +94,7 @@ openedx-development-settings: |
 
 mfe-lms-common-settings: |
   MFE_CONFIG["CATALOG_MICROFRONTEND_URL"] = CATALOG_MICROFRONTEND_URL
+  MFE_CONFIG["EXTENSION_BASE_URL"] = EXTENSION_BASE_URL
 ```
 
 - [ ] Update the `catalog_customization.py` plugin:
@@ -173,6 +173,23 @@ mfes["extension"] = {
     "port": 2003,
     "version": "wbc-ulmo1-prod",
 }
+```
+
+- [ ] Configure `frontend-app-extension` in `forked-brand.py`:
+```python
+    ("mfe-dockerfile-post-npm-install-extension",
+     """
+RUN npm install '@edx/brand@git+https://github.com/OpenPecha/brand-openedx.git#wba-rebranding-main'
+     """),
+```
+
+- [ ] Configure `frontend-app-extension` in `forked-header-footer.py`:
+```python
+    ("mfe-dockerfile-post-npm-install-extension",
+     """
+RUN npm install '@edx/frontend-component-footer@git+https://github.com/OpenPecha/frontend-component-footer.git#wba-rebranding-main'
+RUN npm install '@edx/frontend-component-header@git+https://github.com/OpenPecha/frontend-component-header.git#wba-rebranding-v8-main'
+     """),
 ```
 
 ---
