@@ -1,12 +1,12 @@
 # Rebranding TO-DOs
 
-- [ ] 1. Release Ulmo Mobile Apps
+- [x] 1. Release Ulmo Mobile Apps
   - Release Ulmo version of mobile apps to comply with Google Play policy (deadline: Oct 31, 2026).
 
-- [ ] 2. Rebranding Banner on Homepage [#440](https://github.com/Webuddhist-tech/Sherab-Project/issues/440)
-  - Add an announcement banner for production on the **Django homepage** to inform users about the rebranding.
+- [x] 2. ~Rebranding Banner on Homepage [#440](https://github.com/Webuddhist-tech/Sherab-Project/issues/440)~
+  - ~Add an announcement banner for production on the **Django homepage** to inform users about the rebranding.~
 
-- [ ] 3. Show banner message on catalog homepage [#441](https://github.com/Webuddhist-tech/Sherab-Project/issues/441)
+- [x] 3. Show banner message on catalog homepage [#441](https://github.com/Webuddhist-tech/Sherab-Project/issues/441)
   - Add a banner message on the catalog homepage to inform users about the rebranding.
 
 - [ ] 4. Learning Page Rebranding [#423](https://github.com/Webuddhist-tech/Sherab-Project/issues/423) [#442](https://github.com/Webuddhist-tech/Sherab-Project/issues/442)
@@ -15,10 +15,10 @@
 - [ ] 5. Rebrand Discussion Page [#450](https://github.com/Webuddhist-tech/Sherab-Project/issues/450)
   - Update the design of the discussion page to match the new branding.
 
-- [ ] 6. New Domain & Redirects [#444](https://github.com/Webuddhist-tech/Sherab-Project/issues/444)
+- [x] 6. New Domain & Redirects [#444](https://github.com/Webuddhist-tech/Sherab-Project/issues/444)
   - Get a new domain for Webuddhist Academy and set up redirects from the old domain.
 
-- [ ] 7. Server Platform Name & Domain Update [#374](https://github.com/Webuddhist-tech/Sherab-Project/issues/374)
+- [x] 7. Server Platform Name & Domain Update [#374](https://github.com/Webuddhist-tech/Sherab-Project/issues/374)
   - Update server configurations for the new platform name and domain.
 
 - [ ] 8. Fix Header Design Glitch on Logout [#435](https://github.com/Webuddhist-tech/Sherab-Project/issues/435)
